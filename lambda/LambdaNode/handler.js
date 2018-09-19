@@ -26,7 +26,9 @@ module.exports.users = async (event, context) => {
             return sendResponse(200, body, headers);
         } catch (e) {
             console.error('Error retrieving users', e);
-            return sendResponse(501, 'Internal error', headers);
+            return sendResponse(500, JSON.stringify({
+                error: 'Internal server error'
+            }), headers);
         }
 
     }
@@ -47,10 +49,12 @@ module.exports.users = async (event, context) => {
 
             await dynamo.saveData('Users', item);
             console.log('User saved correctly');
-            return sendResponse(200, 'User saved correctly', headers);
+            return sendResponse(200, JSON.stringify({
+                message: 'User saved correctly'
+            }), headers);
         } catch (e) {
             console.error('Error saving user', e);
-            return sendResponse(501, JSON.stringify({
+            return sendResponse(500, JSON.stringify({
                 error: 'Internal server error'
             }), headers);
         }
