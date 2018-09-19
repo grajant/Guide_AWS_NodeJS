@@ -54,9 +54,16 @@ module.exports.users = async (event, context) => {
             }), headers);
         } catch (e) {
             console.error('Error saving user', e);
-            return sendResponse(500, JSON.stringify({
-                error: 'Internal server error'
-            }), headers);
+            if (e.name === 'ConditionalCheckFailedException') {
+                return sendResponse(409, JSON.stringify({
+                    error: 'User already exists'
+                }), headers);
+            } else {
+                return sendResponse(500, JSON.stringify({
+                    error: 'Internal server error'
+                }), headers);
+            }
+
         }
     }
 

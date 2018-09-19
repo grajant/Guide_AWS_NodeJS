@@ -7,7 +7,8 @@ class DynamoHelper {
     saveData(table, item) {
         const params = {
             TableName: table,         // Nombre de la tabla
-            Item: item
+            Item: item,
+            ConditionExpression : 'attribute_not_exists(UserId)'
         };
 
         return docDynamo.put(params).promise();
