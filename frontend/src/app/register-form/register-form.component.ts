@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AwsLambdaService} from '../aws-lambda.service';
 import {last} from 'rxjs/operators';
+import {headersToString} from 'selenium-webdriver/http';
 
 @Component({
   selector: 'app-register-form',
@@ -17,6 +18,8 @@ export class RegisterFormComponent implements OnInit {
 
   hasUsers: boolean;
   saveSuccess: boolean;
+
+  resultUsers: string;
 
   constructor(
     private awsLambda: AwsLambdaService
@@ -57,18 +60,24 @@ export class RegisterFormComponent implements OnInit {
   }
 
   lambdaGet() {
+    this.hasUsers = true;
+    this.resultUsers = 'Leyendo usuarios...';
     this.awsLambda.invokeGet()
       .subscribe(
         result => {
           console.log(result);
+          this.resultUsers = JSON.stringify(result);
         },
         error => {
           console.error('Not possible to invoke lambda', error);
+          this.resultUsers = 'Error leyendo usuarios';
         }
       );
   }
 
   lambdaPost() {
+    this.hasUsers = false;
+
     const body = {
       firstName: this.firstName,
       lastName: this.lastName,

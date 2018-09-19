@@ -18,7 +18,7 @@
     <label>
       <span class="placeholder">Correo electrónico</span>
       <input type="email" (focus)="inputFocused($event)" (blur)="focusOut($event)"
-             (keydown)="onInputChanged($event, 12)" [(ngModel)]="email" name="email">
+             (keydown)="onInputChanged($event, 50)" [(ngModel)]="email" name="email">
     </label>
     <label *ngIf="false">
       <span class="placeholder">Serial</span>
@@ -29,5 +29,5 @@
   <button (click)="lambdaPost()">Guardar usuario</button>
   <span *ngIf="saveSuccess">Se ha guardado el usuario</span>
   <button (click)="lambdaGet()">Leer todos los usuarios</button>
-  <span *ngIf="hasUsers"></span>
+  <span *ngIf="hasUsers" style="font-size: 18px">{{resultUsers}}</span>
 </div>

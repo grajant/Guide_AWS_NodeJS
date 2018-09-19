@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
-const lambdaEndPoint = 'https://uso3f6rce3.execute-api.us-east-1.amazonaws.com/dev/';
+// Modificar esta constante con el endPoint de la función lambda
+const lambdaEndPoint = 'https://et4edg7ntl.execute-api.us-east-1.amazonaws.com/dev/';
 const localEndPoint = 'http://localhost:3000/register';
 
 interface UserParams {
@@ -23,7 +24,7 @@ export class AwsLambdaService {
   ) { }
 
   invokeGet(): Observable<any> {
-    return this.http.get(lambdaEndPoint + 'get-users');
+    return this.http.get(lambdaEndPoint + 'users/read');
   }
 
   invokePost(userParams: UserParams): Observable<any> {
@@ -31,7 +32,7 @@ export class AwsLambdaService {
       userParameters: userParams
     };
 
-    return this.http.post(localEndPoint, body);
+    return this.http.post(lambdaEndPoint + 'users/create', body);
   }
 
 }
