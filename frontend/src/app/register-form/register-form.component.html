@@ -1,0 +1,33 @@
+<div class="form-container">
+  <form>
+    <label>
+      <span class="placeholder">Nombre</span>
+      <input type="text" (focus)="inputFocused($event)" (blur)="focusOut($event)"
+             [(ngModel)]="firstName" name="firstName">
+    </label>
+    <label>
+      <span class="placeholder">Apellido</span>
+      <input type="text" (focus)="inputFocused($event)" (blur)="focusOut($event)"
+             [(ngModel)]="lastName" name="lastName">
+    </label>
+    <label>
+      <span class="placeholder">Cédula</span>
+      <input type="number" (focus)="inputFocused($event)" (blur)="focusOut($event)"
+             (keydown)="onInputChanged($event, 12)" [(ngModel)]="cc" name="cc">
+    </label>
+    <label>
+      <span class="placeholder">Correo electrónico</span>
+      <input type="email" (focus)="inputFocused($event)" (blur)="focusOut($event)"
+             (keydown)="onInputChanged($event, 12)" [(ngModel)]="email" name="email">
+    </label>
+    <label *ngIf="false">
+      <span class="placeholder">Serial</span>
+      <input type="text" (focus)="inputFocused($event)" (blur)="focusOut($event)"
+             (keydown)="onInputChanged($event, 10)" [(ngModel)]="serial" name="serial">
+    </label>
+  </form>
+  <button (click)="lambdaPost()">Guardar usuario</button>
+  <span *ngIf="saveSuccess">Se ha guardado el usuario</span>
+  <button (click)="lambdaGet()">Leer todos los usuarios</button>
+  <span *ngIf="hasUsers"></span>
+</div>

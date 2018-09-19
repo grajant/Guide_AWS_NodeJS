@@ -1,0 +1,52 @@
+.form-container {
+  max-width: 1024px;
+  padding: 24px 16px;
+  margin: auto;
+
+  button {
+    display: block;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    background: #ccc;
+  }
+
+  button:first-of-type {
+    margin-top: -16px;
+    margin-bottom: 48px;
+  }
+}
+
+label {
+  position: relative;
+
+  display: block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  height: 40px;
+  margin-bottom: 32px;
+
+  span {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 16px;
+    transition: top .2s ease, left .2s ease, transform .2s ease;
+  }
+
+  span.active {
+    top: -20px;
+    left: 0;
+    transform: scale(0.9);
+  }
+
+  input {
+    height: 100%;
+    border: none;
+    padding: 0 16px;
+  }
+
+  input:focus {
+    outline: none;
+  }
+}
