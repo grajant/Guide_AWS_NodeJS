@@ -17,9 +17,11 @@ export class RegisterFormComponent implements OnInit {
   serial: string;
 
   hasUsers: boolean;
-  saveSuccess: boolean;
+  saveEvent: boolean;
+  errorSaving: boolean;
 
   resultUsers: string;
+  saveMsg: string;
 
   constructor(
     private awsLambda: AwsLambdaService
@@ -28,7 +30,8 @@ export class RegisterFormComponent implements OnInit {
 
   ngOnInit() {
     this.hasUsers = false;
-    this.saveSuccess = false;
+    this.saveEvent = false;
+    this.errorSaving = false;
   }
 
   inputFocused(event) {
@@ -60,6 +63,7 @@ export class RegisterFormComponent implements OnInit {
   }
 
   lambdaGet() {
+    this.saveEvent = false;
     this.hasUsers = true;
     this.resultUsers = 'Leyendo usuarios...';
     this.awsLambda.invokeGet()
@@ -89,10 +93,16 @@ export class RegisterFormComponent implements OnInit {
       .subscribe(
         result => {
           console.log(result);
+          this.errorSaving = false;
+          this.saveEvent = true;
+          this.saveMsg = result.message;
         },
         error => {
-          //console.error(error);
-          console.log(error.error);
+          // console.error(error);
+          console.log(error);
+          this.errorSaving = true;
+          this.saveEvent = true;
+          this.saveMsg = error.error.message;
         }
       );
   }

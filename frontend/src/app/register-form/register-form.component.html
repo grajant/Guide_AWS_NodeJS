@@ -27,7 +27,7 @@
     </label>
   </form>
   <button (click)="lambdaPost()">Guardar usuario</button>
-  <span *ngIf="saveSuccess">Se ha guardado el usuario</span>
+  <span *ngIf="saveEvent" id="error_span" [class.error]="errorSaving">{{ saveMsg }}</span>
   <button (click)="lambdaGet()">Leer todos los usuarios</button>
   <span *ngIf="hasUsers" style="font-size: 18px">{{resultUsers}}</span>
 </div>

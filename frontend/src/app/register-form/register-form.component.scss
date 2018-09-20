@@ -17,6 +17,15 @@
     margin-bottom: 48px;
   }
 
+  span.error {
+    color: red;
+  }
+
+  #error_span {
+    display: block;
+    margin-top: -40px;
+    margin-bottom: 48px;
+  }
 
 }
 
@@ -45,7 +54,9 @@ label {
 
   input {
     height: 100%;
+    width: 100%;
     border: none;
+    border-radius: 4px;
     padding: 0 16px;
   }
 
